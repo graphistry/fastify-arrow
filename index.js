@@ -15,7 +15,7 @@ function fastifyArrowPlugin(fastify, opts, next) {
   }
 
   // Add a stub octet-stream parser so fastify doesn't reject payloads with content-type octet-stream
-  fastify.addContentTypeParser('octet-stream', opts, (_, next) => { next(); });
+  fastify.addContentTypeParser('octet-stream', opts, async (request, payload, done) => { return payload; });
 
   fastify.decorateReply('stream', replyAsStream);
   fastify.decorateRequest('recordBatches', readRecordBatches);
