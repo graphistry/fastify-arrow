@@ -29,7 +29,7 @@ test('it should reply with a table', async (t) => {
     .inject({ url: `/`, method: `GET`, headers: getHeaders })
     .then((res) => {
       compareTables(expected, Table.from(res.rawPayload));
-      t.strictEqual(res.headers['content-type'], 'application/octet-stream');
+      t.equal(res.headers['content-type'], 'application/octet-stream');
     })
     .catch(t.threw);
 });
@@ -50,7 +50,7 @@ test('it should reply with multiple tables', async (t) => {
       for (const reader of RecordBatchReader.readAll(res.rawPayload)) {
         compareTables(expected.shift(), Table.from(reader));
       }
-      t.strictEqual(res.headers['content-type'], 'application/octet-stream');
+      t.equal(res.headers['content-type'], 'application/octet-stream');
     })
     .catch(t.threw);
 });
@@ -71,7 +71,7 @@ test(`it should accept a table and respond with a different one`, async (t) => {
     .inject({ url: `/`, method: `POST`, headers: postHeaders, payload })
     .then((res) => {
       compareTables(expectedOut, Table.from(res.rawPayload));
-      t.strictEqual(res.headers['content-type'], 'application/octet-stream');
+      t.equal(res.headers['content-type'], 'application/octet-stream');
     })
     .catch(t.threw);
 
@@ -82,6 +82,6 @@ test(`it should accept a table and respond with a different one`, async (t) => {
       .map((f) => table.getColumn(f.name))
       .map((xs) => Iterable.from(xs).average())
       .map((avg) => FloatVector.from(new Float32Array([avg])))
-    return new Table(RecordBatch.from(averages, names));
+    return Table.from(RecordBatch.from(averages, names));
   }
 });

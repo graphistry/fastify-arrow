@@ -19,8 +19,8 @@ test(`it should read a table as multipart/form-data`, async (t) => {
     })
     .inject({ ...POST_TABLE, payload: form, headers: form.getHeaders() })
     .then((res) => {
-      t.strictEqual(res.headers['content-type'], 'text/plain; charset=utf-8');
-      t.strictEqual(res.body, 'pass');
+      t.equal(res.headers['content-type'], 'text/plain; charset=utf-8');
+      t.equal(res.body, 'pass');
     })
     .catch(t.threw);
 });
@@ -39,8 +39,8 @@ test(`it should read multiple tables as multipart/form-data`, async (t) => {
     })
     .inject({ ...POST_TABLE, payload: form, headers: form.getHeaders() })
     .then((res) => {
-      t.strictEqual(res.headers['content-type'], 'text/plain; charset=utf-8');
-      t.strictEqual(res.body, 'pass');
+      t.equal(res.headers['content-type'], 'text/plain; charset=utf-8');
+      t.equal(res.body, 'pass');
     })
     .catch(t.threw);
 });

@@ -13,8 +13,8 @@ test(`it should read a table as an octet stream`, async (t) => {
   await Fastify().register(arrowPlugin)
     .post('/', validateUpload.bind(null, [expected]))
     .inject({ ...POST_TABLE, payload }).then((res) => {
-      t.strictEqual(res.headers['content-type'], 'text/plain; charset=utf-8');
-      t.strictEqual(res.body, 'pass');
+      t.equal(res.headers['content-type'], 'text/plain; charset=utf-8');
+      t.equal(res.body, 'pass');
     })
     .catch(t.threw);
 });
@@ -27,8 +27,8 @@ test(`it should read multiple tables as an octet stream`, async (t) => {
   await Fastify().register(arrowPlugin)
     .post('/', validateUpload.bind(null, expected))
     .inject({ ...POST_TABLE, payload }).then((res) => {
-      t.strictEqual(res.headers['content-type'], 'text/plain; charset=utf-8');
-      t.strictEqual(res.body, 'pass');
+      t.equal(res.headers['content-type'], 'text/plain; charset=utf-8');
+      t.equal(res.body, 'pass');
     })
     .catch(t.threw);
 });
