@@ -105,6 +105,9 @@ async function validateUpload(expected, request, reply) {
     }
     if (++i >= expected.length || !pass) { break; }
   }
+  if (expected.length !== i) {
+    pass = false;
+  }
   reply.type('text/plain; charset=utf-8').send(pass ? 'pass' : 'fail');
 }
 
